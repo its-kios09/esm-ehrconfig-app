@@ -6,7 +6,7 @@ For more information, please refer to the
 [OpenMRS 3.x Frontend Documentation](https://o3-docs.openmrs.org/).
 
 ### Dashboard
-<img width="1728" alt="Screenshot 2024-03-14 at 11 14 08" src="https://github.com/palladiumkenya/esm-radiology-app/assets/51090527/92101a9d-b423-4a4e-a230-3f2345309514">
+![ehr](https://github.com/its-kios09/esm-ehrconfig-app/assets/67967749/168e4fa7-3df0-4bbb-ab28-794b2373f1f9)
 
 
 # Getting Started
