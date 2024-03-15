@@ -2,6 +2,7 @@ import {
   getAsyncLifecycle,
   defineConfigSchema,
   getSyncLifecycle,
+  registerBreadcrumbs,
 } from "@openmrs/esm-framework";
 import { configSchema } from "./config-schema";
 import { createLeftPanelLink } from "./left-panel-link";
@@ -20,7 +21,16 @@ export const importTranslation = require.context(
 );
 
 export function startupApp() {
+  const ehrconfigBasepath = `${window.spaBase}/home/ehrconfigs`;
+
   defineConfigSchema(moduleName, configSchema);
+  registerBreadcrumbs([
+    {
+      title: "ehrconfigs",
+      path: ehrconfigBasepath,
+      parent: `${window.spaBase}/home`,
+    },
+  ]);
 }
 
 export const root = getAsyncLifecycle(

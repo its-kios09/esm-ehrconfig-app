@@ -18,9 +18,23 @@ export const configSchema = {
       validator((v) => v.length > 0, "At least one person must be greeted."),
     ],
   },
+  daysOfTheWeek: {
+    _type: Type.Array,
+    _description: "Configurable days of the week",
+    _default: [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ],
+  },
 };
 
 export type Config = {
   casualGreeting: boolean;
   whoToGreet: Array<string>;
+  daysOfTheWeek: Array<string>;
 };
