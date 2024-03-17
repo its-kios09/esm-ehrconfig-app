@@ -1,7 +1,8 @@
 import React from "react";
-import { TabPanels, TabList, Tabs, Tab } from "@carbon/react";
+import { TabPanels, TabPanel, TabList, Tabs, Tab } from "@carbon/react";
 import { useTranslation } from "react-i18next";
 import styles from "./ehrconfig-tabs.scss";
+import { DrugCategory } from "./drug_category/drug-category.component";
 
 export const EHRConfigTabs: React.FC = () => {
   const { t } = useTranslation();
@@ -24,6 +25,9 @@ export const EHRConfigTabs: React.FC = () => {
           <Tab className={styles.tab}>{t("morgue-units", "Morgue units")}</Tab>
           <Tab className={styles.tab}>{t("ipd-wards", "IPD wards")}</Tab>
         </TabList>
+        <TabPanels>
+          <DrugCategory />
+        </TabPanels>
       </Tabs>
     </main>
   );
