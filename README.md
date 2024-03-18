@@ -6,10 +6,11 @@ For more information, please refer to the
 [OpenMRS 3.x Frontend Documentation](https://o3-docs.openmrs.org/).
 
 ### Dashboard
-![ehr](https://github.com/its-kios09/esm-ehrconfig-app/assets/67967749/168e4fa7-3df0-4bbb-ab28-794b2373f1f9)
 
+![adddrugtoformulation](https://github.com/its-kios09/esm-ehrconfig-app/assets/67967749/3be7502c-8e2d-4f59-abe1-8d708e27b379)
 
 # Getting Started
+
 
 ```sh
 # Clone the repository
@@ -28,7 +29,7 @@ yarn start --port 5000
 
 Once it is running, a browser window
 should open with the OpenMRS 3 application. Log in and then navigate to
-`/openmrs/spa/home/radiology`.
+`/openmrs/spa/home/ehrconfig`.
 
 # Running tests
 ```
