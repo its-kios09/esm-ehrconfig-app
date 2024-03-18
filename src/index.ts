@@ -45,3 +45,8 @@ export const ehrconfigDashboardLink = getSyncLifecycle(
   }),
   options
 );
+
+export const ehrconfigheader = getAsyncLifecycle(
+  () => import("./header/ehrconfig-header.component"),
+  options
+);

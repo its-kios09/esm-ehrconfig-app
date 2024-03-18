@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -17,23 +18,27 @@ import {
   Button,
   TextInput,
   Modal,
-  TextArea,
+  Select,
+  ComboBox,
+  SelectItem,
 } from "@carbon/react";
 import { formatDate, parseDate, usePagination } from "@openmrs/esm-framework";
-import "./drug-category.scss";
 import { CardHeader } from "@openmrs/esm-patient-common-lib";
 
-export const DrugCategory: React.FC = () => {
+export const AddFormulationToDrug: React.FC = () => {
   const { t } = useTranslation();
   const [currentPageSize, setCurrentPageSize] = useState<number>(10);
   const [searchString, setSearchString] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const headerTitle = t("drugcategory", " DRUG CATEGORY");
+  const headerTitle = t("addformulationtodrug", "ADD FORMULATION TO DRUG");
 
   // Placeholder for workListEntries
   const workListEntries = [];
   // Placeholder for isLoading
   const isLoading = false;
+  const filterItems = (menu) => {
+    return menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase());
+  };
 
   const searchResults = workListEntries.filter((item) => {
     return item.action === "NEW" && item.status === "DECLINED";
@@ -56,8 +61,10 @@ export const DrugCategory: React.FC = () => {
 
   const tableColums = [
     { id: 0, header: t("id", "ID"), key: "id" },
-    { id: 1, header: t("category", "DRUG CATEGORY"), key: "category" },
-    { id: 2, header: t("description", "DESCRIPTION"), key: "description" },
+    { id: 1, header: t("drugname", "DRUG NAME"), key: "drugname" },
+    { id: 2, header: t("Formulation", "FORMULATIONS"), key: "Formulation" },
+    { id: 4, header: t("dosage", "DOSAGE"), key: "dosage" },
+    { id: 5, header: t("Category", "DRUG CATEGORY"), key: "Category" },
   ];
 
   return isLoading ? (
@@ -100,7 +107,7 @@ export const DrugCategory: React.FC = () => {
                     onChange={(event) => setSearchString(event.target.value)}
                   />
                   <Button onClick={() => setIsModalOpen(true)}>
-                    ADD NEW DRUG CATEGORY
+                    ADD FORMULATION TO DRUG
                   </Button>
                 </TableToolbarContent>
               </TableToolbar>
@@ -150,29 +157,49 @@ export const DrugCategory: React.FC = () => {
         }`}
       </style>
       <Modal
-        primaryButtonText="ADD DRUG CATEGORY"
+        primaryButtonText="ADD NEW DRUG"
         secondaryButtonText="CANCEL"
         open={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
-        modalLabel="ADD DRUG CATEGORY"
-        modalHeading="DRUG CATEGORY"
+        modalLabel="ADD FORMULATION TO DRUG"
+        modalHeading="DRUGS"
+        hasScrollingContent
       >
         <TextInput
           data-modal-primary-focus
           id="text-input-1"
-          labelText="Drug Category Name*"
-          placeholder="Enter your Drug Category Name"
+          labelText="Drug Name*"
+          placeholder="Enter your Drug Name"
           required
           style={{
             marginBottom: "1rem",
           }}
         />
-        <TextArea
-          labelText="Drug Category Description*"
-          rows={4}
-          id="text-area-1"
-          required
-        />
+        <div style={{ marginBottom: "20px" }}>
+          <ComboBox
+            allowCustomValue
+            shouldFilterItem={filterItems}
+            required
+            onChange={(e) => {
+              console.log(e);
+            }}
+            id="carbon-combobox"
+            items={[
+              "DROPS-1.44mL",
+              "TAB-75mg",
+              "SOLUTION-37%",
+              "TAB-1g",
+              "TAB-500mg",
+              "CREAM-30mg",
+            ]}
+            downshiftProps={{
+              onStateChange: () => {
+                console.log("the state has changed");
+              },
+            }}
+            titleText="Formulations*"
+          />
+        </div>
       </Modal>
     </div>
   );

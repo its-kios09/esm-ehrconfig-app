@@ -19,6 +19,10 @@
       "component": "root",
       "name": "ehrconfig-dashboard-root",
       "slot": "ehrconfig-dashboard-slot"
+    },
+    {
+      "component": "ehrconfigheader",
+      "name": "ehrconfig-header"
     }
   ],
   "pages": [

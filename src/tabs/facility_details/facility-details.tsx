@@ -20,15 +20,12 @@ import {
   TextArea,
 } from "@carbon/react";
 import { formatDate, parseDate, usePagination } from "@openmrs/esm-framework";
-import "./drug-category.scss";
-import { CardHeader } from "@openmrs/esm-patient-common-lib";
 
-export const DrugCategory: React.FC = () => {
+export const FacilityDetails: React.FC = () => {
   const { t } = useTranslation();
   const [currentPageSize, setCurrentPageSize] = useState<number>(10);
   const [searchString, setSearchString] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const headerTitle = t("drugcategory", " DRUG CATEGORY");
 
   // Placeholder for workListEntries
   const workListEntries = [];
@@ -55,16 +52,14 @@ export const DrugCategory: React.FC = () => {
   }, [paginatedResults]);
 
   const tableColums = [
-    { id: 0, header: t("id", "ID"), key: "id" },
-    { id: 1, header: t("category", "DRUG CATEGORY"), key: "category" },
-    { id: 2, header: t("description", "DESCRIPTION"), key: "description" },
+    { id: 0, header: t("category", "Drug Category"), key: "category" },
+    { id: 1, header: t("description", "Description"), key: "description" },
   ];
 
   return isLoading ? (
     <DataTableSkeleton />
   ) : (
     <div>
-      <CardHeader title={headerTitle} children={""}></CardHeader>
       <DataTable
         rows={rows}
         headers={tableColums}
@@ -100,25 +95,27 @@ export const DrugCategory: React.FC = () => {
                     onChange={(event) => setSearchString(event.target.value)}
                   />
                   <Button onClick={() => setIsModalOpen(true)}>
-                    ADD NEW DRUG CATEGORY
+                    Add drug Category
                   </Button>
                 </TableToolbarContent>
               </TableToolbar>
               <Table {...getTableProps()}>
                 <TableHead>
                   <TableRow>
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
-                        {header.header}
+                    {rows.map((row) => (
+                      <TableHeader {...getHeaderProps({ row })}>
+                        {row.cells[0].value}
                       </TableHeader>
                     ))}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
-                    <TableRow {...getRowProps({ row })}>
-                      {row.cells.map((cell) => (
-                        <TableCell key={cell.id}>{cell.value}</TableCell>
+                  {headers.map((header) => (
+                    <TableRow>
+                      {rows.map((row) => (
+                        <TableCell key={row.cells[header.id].id}>
+                          {row.cells[header.id].value}
+                        </TableCell>
                       ))}
                     </TableRow>
                   ))}
@@ -144,18 +141,19 @@ export const DrugCategory: React.FC = () => {
           </>
         )}
       </DataTable>
+
       <style>
         {`.cds--modal-close-button {
           display: none;
         }`}
       </style>
       <Modal
-        primaryButtonText="ADD DRUG CATEGORY"
-        secondaryButtonText="CANCEL"
+        primaryButtonText="Add drug category"
+        secondaryButtonText="Cancel"
         open={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
-        modalLabel="ADD DRUG CATEGORY"
-        modalHeading="DRUG CATEGORY"
+        modalLabel="Add drug category"
+        modalHeading="Drug Category"
       >
         <TextInput
           data-modal-primary-focus
