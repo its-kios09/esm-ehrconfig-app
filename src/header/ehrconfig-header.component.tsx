@@ -44,7 +44,7 @@ const EHRconfigHeader: React.FC = () => {
                 border: "none",
                 maxWidth: "10rem",
               }}
-              id="appointment-date-picker"
+              id="ehrconfig-date-picker"
               placeholder="DD-MMM-YYYY"
               labelText=""
               type="text"
